@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Searchuser from './Searchuser'
 
 export class Users extends Component {
 
@@ -7,71 +8,9 @@ export class Users extends Component {
       super(props)
   
       this.state = {
-           users:[
+           users:[]
+
           
-            {
-                login: "mojombo",
-                id: 1,
-                node_id: "MDQ6VXNlcjE=",
-                avatar_url: "https://avatars.githubusercontent.com/u/1?v=4",
-                gravatar_id: "",
-                url: "https://api.github.com/users/mojombo",
-                html_url: "https://github.com/mojombo",
-                followers_url: "https://api.github.com/users/mojombo/followers",
-                following_url: "https://api.github.com/users/mojombo/following{/other_user}",
-                gists_url: "https://api.github.com/users/mojombo/gists{/gist_id}",
-                starred_url: "https://api.github.com/users/mojombo/starred{/owner}{/repo}",
-                subscriptions_url: "https://api.github.com/users/mojombo/subscriptions",
-                organizations_url: "https://api.github.com/users/mojombo/orgs",
-                repos_url: "https://api.github.com/users/mojombo/repos",
-                events_url: "https://api.github.com/users/mojombo/events{/privacy}",
-                received_events_url: "https://api.github.com/users/mojombo/received_events",
-                type: "User",
-                site_admin: false
-              },
-              {
-                login: "defunkt",
-                id: 2,
-                node_id: "MDQ6VXNlcjI=",
-                avatar_url: "https://avatars.githubusercontent.com/u/2?v=4",
-                gravatar_id: "",
-                url: "https://api.github.com/users/defunkt",
-                html_url: "https://github.com/defunkt",
-                followers_url: "https://api.github.com/users/defunkt/followers",
-                following_url: "https://api.github.com/users/defunkt/following{/other_user}",
-                gists_url: "https://api.github.com/users/defunkt/gists{/gist_id}",
-                starred_url: "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
-                subscriptions_url: "https://api.github.com/users/defunkt/subscriptions",
-                organizations_url: "https://api.github.com/users/defunkt/orgs",
-                repos_url: "https://api.github.com/users/defunkt/repos",
-                events_url: "https://api.github.com/users/defunkt/events{/privacy}",
-                received_events_url: "https://api.github.com/users/defunkt/received_events",
-                type: "User",
-                site_admin: false
-              },
-              {
-                login: "pjhyett",
-                id: 3,
-                node_id: "MDQ6VXNlcjM=",
-                avatar_url: "https://avatars.githubusercontent.com/u/3?v=4",
-                gravatar_id: "",
-                url: "https://api.github.com/users/pjhyett",
-                html_url: "https://github.com/pjhyett",
-                followers_url: "https://api.github.com/users/pjhyett/followers",
-                following_url: "https://api.github.com/users/pjhyett/following{/other_user}",
-                gists_url: "https://api.github.com/users/pjhyett/gists{/gist_id}",
-                starred_url: "https://api.github.com/users/pjhyett/starred{/owner}{/repo}",
-                subscriptions_url: "https://api.github.com/users/pjhyett/subscriptions",
-            organizations_ur: "https://api.github.com/users/pjhyett/orgs",
-            repos_ur: "https://api.github.com/users/pjhyett/repos",
-            events_ur: "https://api.github.com/users/pjhyett/events{/privacy}",
-            received_events_ur: "https://api.github.com/users/pjhyett/received_events",
-            typ: "User",
-            site_admi: false
-              }
-
-
-           ]
       }
   }
   
@@ -91,12 +30,35 @@ export class Users extends Component {
     this.getUsers();
   }
 
+  searchUsersFromGit=(data)=>{
+
+  if(data !='')
+  {
+    axios.get(`https://api.github.com/search/users?q={query}{&page,per_page,sort,order?q=${data}`).
+    then(response=>{
+      console.log(response)
+    })
+  }
+
+  }
+
+
     render() {
         return (
             <div>
+
+          <div class="row my-2">
+  
+        <div className="col-md-6">
+          <Searchuser />
+        </div>
+            
+          </div>
+
+
                       <div className="row">
              {this.state.users.map(user=>(
-               <div className="col-md-4">
+               <div className="col-md-4" key="user.id">
              <div class="card">
                <img class="card-img-top" src={user.avatar_url} alt=""/>
                <div class="card-body">
@@ -104,6 +66,7 @@ export class Users extends Component {
                  <p class="card-text">
                    <a href={user.html_url} className="btn btn-primary">show more</a>
                    <a href={user.repos_ur} className="btn btn-dark">Repository</a>
+                   <span getUserSearch="searchUsersFromGit(data)"></span>
                  </p>
                </div>
              </div>

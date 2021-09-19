@@ -4,7 +4,7 @@ export class Searchuser extends Component {
 
 state=
 {
-search:'salam'
+search:''
 }
 
 handleForm=(e)=>
@@ -35,7 +35,7 @@ this.props.getUserSearch(this.state.search)
 
   <div className="form-group">
   
-    <input type="text" onChange={this.handleForm} value={search} placeholder="search users..." id="search" class="form-control" />
+    <input type="text" onChange={this.handleForm} value={search} placeholder="search users..." id="search" className="form-control" />
   </div>
 
  <button className="btn btn-danger btn-block" >search</button>

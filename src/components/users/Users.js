@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import User from './User'
 import Searchuser from './Searchuser'
 
 export class Users extends Component {
@@ -34,9 +35,12 @@ export class Users extends Component {
 
   if(data !='')
   {
-    axios.get(`https://api.github.com/search/users?q={query}{&page,per_page,sort,order?q=${data}`).
+    axios.get(`https://api.github.com/search/users?q=${data}`).
     then(response=>{
-      console.log(response)
+      this.setState({
+        users:response.data.items
+      })
+   
     })
   }
 
@@ -47,10 +51,10 @@ export class Users extends Component {
         return (
             <div>
 
-          <div class="row my-2">
+          <div className="row my-2">
   
         <div className="col-md-6">
-          <Searchuser />
+          <Searchuser  getUserSearch={this.searchUsersFromGit} />
         </div>
             
           </div>
@@ -58,18 +62,9 @@ export class Users extends Component {
 
                       <div className="row">
              {this.state.users.map(user=>(
-               <div className="col-md-4" key="user.id">
-             <div class="card">
-               <img class="card-img-top" src={user.avatar_url} alt=""/>
-               <div class="card-body">
-                 <h4 class="card-title">{user.login}</h4>
-                 <p class="card-text">
-                   <a href={user.html_url} className="btn btn-primary">show more</a>
-                   <a href={user.repos_ur} className="btn btn-dark">Repository</a>
-                   <span getUserSearch="searchUsersFromGit(data)"></span>
-                 </p>
-               </div>
-             </div>
+               <div className="col-md-4" key={user.id} >
+                 <User user={user} />
+             
              </div>))}
                       </div>
 

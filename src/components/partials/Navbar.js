@@ -3,8 +3,8 @@ import React from 'react'
 function Navbar() {
     return (
         <div>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-                <a className="navbar-brand" href="#">Git engine</a>
+            <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
+                <a className="navbar-brand" href="">Git engine</a>
                 <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation"></button>
                 <div className="collapse navbar-collapse" id="collapsibleNavId">

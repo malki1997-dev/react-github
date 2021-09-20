@@ -28,7 +28,7 @@ user:{}
         const {user}=this.state;
         return (
             <div>
-              <user user={user}/>
+              <User user={user}/>
             </div>
         )
     }
